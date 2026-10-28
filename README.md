@@ -1,2 +1,1 @@
-# dotfiles
-Arch + I3wm + Alacritty
+![screenshot](desktop.png)
