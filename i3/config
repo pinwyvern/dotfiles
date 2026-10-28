@@ -1,0 +1,164 @@
+set $mod Mod1
+font pango:IBM Plex Sans 9
+exec --no-startup-id dex --autostart --environment i3
+
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet
+
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+floating_modifier $mod
+tiling_drag modifier titlebar
+
+set $coal       #111416
+set $shadow     #191D1E
+set $panel      #202625
+set $moss       #343D35
+set $olive      #656957
+set $burgundy   #543C46
+set $blue       #8195A5
+set $dust       #C1BFB1
+set $muted      #858C87
+set $white      #E0E2DE
+
+bindsym $mod+Return exec alacritty
+bindsym $mod+d exec --no-startup-id dmenu_run \
+    -fn 'IBM Plex Mono-10' \
+    -nb '#191D1E' \
+    -nf '#C1BFB1' \
+    -sb '#343D35' \
+    -sf '#E0E2DE'
+
+bindsym $mod+Shift+q kill
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+set $ws1 "1: den"
+set $ws2 "2: woods"
+set $ws3 "3: static"
+set $ws4 "4: outside"
+set $ws5 "5: nowhere"
+
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+default_border pixel 2
+default_floating_border pixel 2
+hide_edge_borders smart
+
+# class                 border      background  text        indicator   child_border
+client.focused          $olive      $moss       $white      $blue       $olive
+client.focused_inactive $panel      $panel      $muted      $shadow     $panel
+client.unfocused        $coal       $shadow     $muted      $shadow     $coal
+client.urgent           $burgundy   $burgundy   $white      $blue       $burgundy
+client.placeholder      $coal       $coal       $muted      $shadow     $coal
+
+gaps inner 6
+gaps outer 3
+
+
+mode "resize" {
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+bar {
+    position bottom
+    mode dock
+    hidden_state hide
+    modifier $mod
+
+    font pango:IBM Plex Sans 10
+    separator_symbol " / "
+
+    status_command i3status
+
+    colors {
+        background $coal
+        statusline $dust
+        separator  $moss
+
+        focused_workspace  $moss     $moss     $white
+        active_workspace   $panel    $panel    $blue
+        inactive_workspace $coal     $coal     $muted
+        urgent_workspace   $burgundy $burgundy $white
+        binding_mode       $burgundy $burgundy $white
+    }
+}

@@ -1,0 +1,122 @@
+[general]
+live_config_reload = true
+
+[window]
+dimensions = { columns = 100, lines = 30 }
+padding = { x = 14, y = 12 }
+dynamic_padding = false
+decorations = "none"
+opacity = 1.0
+dynamic_title = false
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[font]
+size = 10
+
+[font.normal]
+family = "IBM Plex Mono"
+style = "Regular"
+
+[font.bold]
+family = "IBM Plex Mono"
+style = "Bold"
+
+[font.italic]
+family = "IBM Plex Mono"
+style = "Italic"
+
+[font.offset]
+x = 0
+y = 1
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[cursor]
+style = { shape = "Block", blinking = "Never" }
+unfocused_hollow = true
+thickness = 0.20
+
+[terminal]
+osc52 = "CopyPaste"
+
+[selection]
+save_to_clipboard = false
+
+[colors.primary]
+background = "#111416"
+foreground = "#C1BFB1"
+dim_foreground = "#858C87"
+bright_foreground = "#E0E2DE"
+
+[colors.cursor]
+text = "#111416"
+cursor = "#8195A5"
+
+[colors.vi_mode_cursor]
+text = "#111416"
+cursor = "#656957"
+
+[colors.selection]
+text = "#E0E2DE"
+background = "#343D35"
+
+[colors.search.matches]
+foreground = "#111416"
+background = "#8195A5"
+
+[colors.search.focused_match]
+foreground = "#111416"
+background = "#C1BFB1"
+
+[colors.hints.start]
+foreground = "#111416"
+background = "#8195A5"
+
+[colors.hints.end]
+foreground = "#111416"
+background = "#656957"
+
+[colors.normal]
+black   = "#191D1E"
+red     = "#986C70"
+green   = "#84907A"
+yellow  = "#AAA184"
+blue    = "#8195A5"
+magenta = "#897789"
+cyan    = "#7F9998"
+white   = "#C1BFB1"
+
+[colors.bright]
+black   = "#505956"
+red     = "#B27E81"
+green   = "#A0AA91"
+yellow  = "#C1B696"
+blue    = "#A0B1BE"
+magenta = "#A391A4"
+cyan    = "#9DB6B3"
+white   = "#E0E2DE"
+
+[colors.dim]
+black   = "#111416"
+red     = "#69494D"
+green   = "#59644F"
+yellow  = "#716A53"
+blue    = "#536978"
+magenta = "#5F5261"
+cyan    = "#526D6B"
+white   = "#858C87"
+
+[bell]
+duration = 0
+
+[mouse]
+hide_when_typing = true
+
+[terminal.shell]
+program = "/bin/sh"
+args = ["-l"]
